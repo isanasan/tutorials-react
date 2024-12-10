@@ -1,37 +1,36 @@
 import { useState } from "react";
 
-function Square() {
-  const [value, setValue] = useState(null);
-
-  function handleClic() {
-    setValue('X');
-  }
-
-  return <button
-    className="square"
-    onClick={handleClic}
-    >
-      {value}
-    </button>;
+function Square({value, onSquareClick}) {
+  return <button className="square" onClick={onSquareClick}>
+    {value}
+  </button>;
 }
 
 export default function Board() {
+  const [squeres, setsqueres] = useState(Array(9).fill(null));
+
+  function handleClick(i) {
+    const nextSquares = squeres.slice();
+    nextSquares[i] = "X";
+    setsqueres(nextSquares);
+  }
+
   return (
     <>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        <Square value={squeres[0]} onSquareClick={() => handleClick(0)} />
+        <Square value={squeres[1]} onSquareClick={() => handleClick(1)} />
+        <Square value={squeres[2]} onSquareClick={() => handleClick(2)} />
       </div>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        <Square value={squeres[3]} onSquareClick={() => handleClick(3)} />
+        <Square value={squeres[4]} onSquareClick={() => handleClick(4)} />
+        <Square value={squeres[5]} onSquareClick={() => handleClick(5)} />
       </div>
       <div className="board-row">
-        <Square />
-        <Square />
-        <Square />
+        <Square value={squeres[6]} onSquareClick={() => handleClick(6)} />
+        <Square value={squeres[7]} onSquareClick={() => handleClick(7)} />
+        <Square value={squeres[8]} onSquareClick={() => handleClick(8)} />
       </div>
     </>
   );

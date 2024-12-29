@@ -7,12 +7,21 @@ function Square({value, onSquareClick}) {
 }
 
 export default function Board() {
+  const [xIsNext, setXIsNext] = useState(true);
   const [squeres, setsqueres] = useState(Array(9).fill(null));
 
   function handleClick(i) {
+    if (squeres[i]) {
+      return;
+    }
     const nextSquares = squeres.slice();
-    nextSquares[i] = "X";
+    if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
     setsqueres(nextSquares);
+    setXIsNext(!xIsNext);
   }
 
   return (
